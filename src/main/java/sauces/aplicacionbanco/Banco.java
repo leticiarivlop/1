@@ -6,9 +6,9 @@
 package sauces.aplicacionbanco;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.Map;
 
 /**
  *
@@ -17,7 +17,7 @@ import java.util.TreeSet;
 public class Banco {
 
     private String nombre;
-    private Set<Cuenta> cuentas;
+    private Map<String, Cuenta> cuentas;
 
     /**
      * Método que inicializa el nombre de la cuenta. Además guarda el nombre en
@@ -27,7 +27,7 @@ public class Banco {
      */
     public Banco(String nombre) {
         this.nombre = nombre;
-        cuentas = new TreeSet<>();
+        cuentas = new HashMap<>();
     }
 
     /**
@@ -46,7 +46,7 @@ public class Banco {
      */
     public List<Cuenta> getCuentas() {
         List<Cuenta> cuenta;
-        cuenta = new ArrayList<>(cuentas);
+        cuenta = new ArrayList<>(cuentas.values());
         return cuenta;
     }
 
@@ -74,7 +74,13 @@ public class Banco {
      * @return Verdadero si la cuenta ha sido creada con éxito.
      */
     public boolean abrirCuenta(String codigo, String titular, float saldo) {
-        return cuentas.add(new Cuenta(codigo, titular, saldo));
+        boolean salida = false;
+
+        if (!cuentas.containsKey(codigo)) {
+            cuentas.put(codigo, new Cuenta(codigo, titular, saldo));
+            salida = true;
+        }
+        return salida;
     }
 
     /**
@@ -85,13 +91,7 @@ public class Banco {
      * @return Cuenta en funcion del codigo solicitado.
      */
     public Cuenta getCuenta(String codigo) {
-
-        for (Cuenta c1 : cuentas) {
-            if (c1.getCodigo().equals(codigo)) {
-                return c1;
-            }
-        }
-        return null;
+        return cuentas.get(codigo);
     }
 
     /**
@@ -103,10 +103,9 @@ public class Banco {
      */
     public boolean cancelarCuenta(String codigo) {
         boolean salida = false;
-        Cuenta c = getCuenta(codigo);
 
-        if (c != null) {
-            salida = cuentas.remove(c);
+        if (cuentas.remove(codigo) != null) {
+            salida = true;
         }
         return salida;
 
@@ -119,10 +118,9 @@ public class Banco {
      */
     public float getTotalDepositos() {
         float acumulador = 0;
-        for (Cuenta c : cuentas) {
+        for (Cuenta c : cuentas.values()) {
             acumulador += c.getSaldo();
         }
         return acumulador;
     }
-
 }
