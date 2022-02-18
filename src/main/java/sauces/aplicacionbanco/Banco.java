@@ -5,8 +5,7 @@
  */
 package sauces.aplicacionbanco;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 /**
  *
@@ -15,41 +14,36 @@ import java.util.List;
 public class Banco {
 
     private String nombre;
-    private List<Cuenta> cuentas;
+    private LinkedList<Cuenta> cuentas;
 
     /**
-     * Método que inicializa el nombre de la cuenta. Además guarda el nombre en
-     * un Hashset.
      *
-     * @param nombre Nombre de la cuenta.
+     * @param nombre
      */
     public Banco(String nombre) {
         this.nombre = nombre;
-        cuentas = new ArrayList<>();
+        cuentas = new LinkedList<>();
     }
 
     /**
-     * Método que devuleve el nombre de la cuenta solicitada.
      *
-     * @return Nombre de la cuenta solicitada.
+     * @return
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * Método que guarda las cuentas creadas en una lista (ArrayList).
      *
-     * @return Lista de cuentas creadas.
+     * @return
      */
-    public List<Cuenta> getCuentas() {
+    public LinkedList<Cuenta> getCuentas() {
         return cuentas;
     }
 
     /**
-     * Método que modifica el nombre de la cuenta solicitada.
      *
-     * @param nombre Nombre de la cuenta.
+     * @param nombre
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -61,13 +55,11 @@ public class Banco {
     }
 
     /**
-     * Método que nos permite abrir una cuenta, estableciendole un código, un
-     * titular y un saldo.
      *
-     * @param codigo Codigo de la cuenta.
-     * @param titular Titular de la cuenta.
-     * @param saldo Saldo de la cuenta.
-     * @return Verdadero si la cuenta ha sido creada con éxito.
+     * @param codigo
+     * @param titular
+     * @param saldo
+     * @return
      */
     public boolean abrirCuenta(String codigo, String titular, float saldo) {
         boolean salida = false;
@@ -79,11 +71,9 @@ public class Banco {
     }
 
     /**
-     * Método que develve la cuenta en funcion del código que se le ha
-     * solicitado.
      *
-     * @param codigo Codigo de la cuenta.
-     * @return Cuenta en funcion del codigo solicitado.
+     * @param codigo
+     * @return
      */
     public Cuenta getCuenta(String codigo) {
         Cuenta c = null;
@@ -97,11 +87,9 @@ public class Banco {
     }
 
     /**
-     * Método que permite cancelar una cuenta pasándole un codigo de cuenta
-     * concreto.
      *
-     * @param codigo Codigo de la cuenta.
-     * @return Verdadero si la cuenta ha sido cancelada con éxito.
+     * @param codigo
+     * @return
      */
     public boolean cancelarCuenta(String codigo) {
         boolean salida = false;
@@ -115,9 +103,8 @@ public class Banco {
     }
 
     /**
-     * Método que devuelve el total de depositos de las cuentas creadas.
      *
-     * @return Total de depositos de las cuentas creadas.
+     * @return
      */
     public float getTotalDepositos() {
         float acumulador = 0;
