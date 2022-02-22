@@ -176,11 +176,12 @@ public class Cuenta implements Comparable<Cuenta> {
      *
      * @param cantidad cantidad a reintegrar en la cuenta
      */
-    public void reintegrar(float cantidad) {
-        if (cantidad > 0 && cantidad <= saldo) {
+    public void reintegrar(float cantidad) throws SaldoInsuficienteException {
+            if(cantidad>saldo){
+                throw new SaldoInsuficienteException("Saldo insuficiente");
+            }
             saldo -= cantidad;
             movimientos.add(new Movimiento(LocalDate.now(), 'R', -cantidad, saldo));
-        }
     }
 
     /**
